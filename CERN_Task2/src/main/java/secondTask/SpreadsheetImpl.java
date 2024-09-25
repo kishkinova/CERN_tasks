@@ -26,12 +26,30 @@ public class SpreadsheetImpl {
 
     public void put(int row, int column, String value) {
         checkIndexBounds(row, column);
-        spreadsheet.get(row).set(column, value);
+        switch (getValueType(value)) {
+            case STRING, FORMULA ->
+                    spreadsheet.get(row).set(column, value);
+            case INTEGER ->
+                    spreadsheet.get(row).set(column, String.valueOf(Integer.parseInt(value.trim())));
+        }
     }
 
     public void checkIndexBounds(int row, int column){
         if (row >= this.rows || column >= this.columns || row < 0 || column < 0) {
             throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public ValueType getValueType(int row, int column) {
+        return getValueType(get(row, column));
+    }
+    public ValueType getValueType(String value){
+        if (value.startsWith("=")) {
+            return ValueType.FORMULA;
+        } else if (value.trim().matches("\\d+")) {
+            return ValueType.INTEGER;
+        } else {
+            return ValueType.STRING;
         }
     }
 
