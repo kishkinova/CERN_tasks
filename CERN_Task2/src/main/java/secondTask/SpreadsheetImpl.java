@@ -20,11 +20,19 @@ public class SpreadsheetImpl {
     }
 
     public String get(int row, int column){
+        checkIndexBounds(row, column);
         return spreadsheet.get(row).get(column);
     }
 
     public void put(int row, int column, String value) {
+        checkIndexBounds(row, column);
         spreadsheet.get(row).set(column, value);
+    }
+
+    public void checkIndexBounds(int row, int column){
+        if (row >= this.rows || column >= this.columns || row < 0 || column < 0) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
 }
