@@ -1,12 +1,26 @@
 package secondTask;
 
+/**
+ * SpreadsheetExporter interface implementation to export the spreadsheet with dashes ('-'). */
+
 public class DashSpreadsheetExporter implements SpreadsheetExporter {
     private final SpreadsheetImpl sheet;
 
+    /**
+     * Constructor for DashSpreadsheetExporter.
+     *
+     * @param sheet the SpreadsheetImpl object to export.
+     */
     public DashSpreadsheetExporter(SpreadsheetImpl sheet) {
         this.sheet = sheet;
     }
 
+    /**
+     Exports the spreadsheet by replacing each empty cell with a dash ('-').
+     * Each cell value is followed by a dash ('-').
+     *
+     * @return a String representing the exported spreadsheet.
+     */
     @Override
     public String export() {
         StringBuilder sb = new StringBuilder();
