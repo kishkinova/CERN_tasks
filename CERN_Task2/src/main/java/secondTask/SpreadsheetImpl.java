@@ -21,6 +21,9 @@ public class SpreadsheetImpl {
      * @param columns the number of columns in the spreadsheet.
      */
     public SpreadsheetImpl(int rows, int columns) {
+        if (rows <= 0 || columns <= 0) {
+            throw new IllegalArgumentException("Rows and columns must be positive.");
+        }
         this.rows = rows;
         this.columns = columns;
         this.spreadsheet = Stream.generate(() -> new ArrayList<>(Collections.nCopies(columns, "")))
@@ -51,6 +54,9 @@ public class SpreadsheetImpl {
      * @throws IndexOutOfBoundsException if the row or column index is out of bounds.
      */
     public void put(int row, int column, String value) {
+        if (value == null) {
+            throw new IllegalArgumentException("Cell value cannot be null.");
+        }
         checkIndexBounds(row, column);
         switch (getValueType(value)) {
             case STRING, FORMULA ->
