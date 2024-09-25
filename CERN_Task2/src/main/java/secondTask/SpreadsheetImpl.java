@@ -22,5 +22,10 @@ public class SpreadsheetImpl {
     public String get(int row, int column){
         return spreadsheet.get(row).get(column);
     }
+
+    public void put(int row, int column, String value) {
+        spreadsheet.get(row).set(column, value);
+    }
+
 }
 
